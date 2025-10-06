@@ -28,7 +28,6 @@ export const getProduct = async (req: Request, res: Response) => {
     const product = await sql`
         SELECT * FROM products
         WHERE id=${id}
-        RETURNING *
     `;
     res.status(200).json({ success: true, data: product[0] });
   } catch (error: unknown) {
