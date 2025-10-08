@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node backend/server.ts",
     "build": "tsc -p backend/tsconfig.json",
-    "start": "node backend/dist/server.js"
+    "start": "node --watch backend/dist/server.js"
   },
   "keywords": [],
   "author": "",
