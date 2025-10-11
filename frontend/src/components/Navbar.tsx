@@ -1,6 +1,7 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
+import ThemeSelector from "./ThemeSelector";
 
 export default function Navbar() {
   const { pathname } = useLocation();
@@ -32,7 +33,7 @@ export default function Navbar() {
                 <div className="p-2 rounded-full hover:bg-base-200 transition-colors">
                   <FaShoppingBag className="size-5" />
                   <span className="badge badge-sm badge-primary indicator-item">
-                    8
+                    0
                   </span>
                 </div>
               </div>
