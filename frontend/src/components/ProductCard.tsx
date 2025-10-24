@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useProductStore } from "../store/useProductStore";
 
 interface Product {
   id: number;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const deleteProduct = useProductStore((state) => state.deleteProduct);
   return (
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
       <figure className="relative pt-[56.25%]">
@@ -36,7 +38,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             <FaEdit className="size-4" />
           </Link>
 
-          <button className="btn btn-sm btn-error btn-outline">
+          <button
+            className="btn btn-sm btn-error btn-outline"
+            onClick={() => deleteProduct(product.id)}
+          >
             <FaTrash className="size-4" />
           </button>
         </div>
