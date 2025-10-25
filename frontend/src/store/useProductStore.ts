@@ -11,10 +11,20 @@ interface Product {
   image: string;
 }
 
+interface FormData {
+  name: string;
+  price: string;
+  image: string;
+}
+
 interface ProductStore {
   products: Product[];
   loading: boolean;
   error: string | null;
+  formData: FormData;
+  setFormData: (formData: FormData) => void;
+  resetForm: () => void;
+  addProduct: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   fetchProducts: () => Promise<void>;
   deleteProduct: (id: number) => Promise<void>;
 }
@@ -23,6 +33,32 @@ export const useProductStore = create<ProductStore>((set, get) => ({
   products: [],
   loading: false,
   error: null,
+  formData: {
+    name: "",
+    price: "",
+    image: "",
+  },
+
+  setFormData: (formData) => set({ formData }),
+  resetForm: () => set({ formData: { name: "", price: "", image: "" } }),
+
+  addProduct: async (e) => {
+    e.preventDefault();
+    set({ loading: true });
+
+    try {
+      const { formData } = get();
+      await axios.post(`${BASE_URL}/api/products`, formData);
+      await get().fetchProducts();
+      get().resetForm();
+      toast.success("Product added successfully");
+    } catch (error) {
+      console.log("Error in addProduct function: ", error);
+      toast.error("Something went wrong");
+    } finally {
+      set({ loading: false });
+    }
+  },
 
   fetchProducts: async () => {
     set({ loading: true });

@@ -4,6 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import { LuRefreshCw } from "react-icons/lu";
 import ProductCard from "../components/ProductCard";
 import { BiPackage } from "react-icons/bi";
+import AddProductModal from "../components/AddProductModal";
 
 export default function HomePage() {
   const { products, loading, error, fetchProducts } = useProductStore();
@@ -17,7 +18,14 @@ export default function HomePage() {
   return (
     <main className="mx-auto px-4 py-8 max-w-6xl">
       <div className="flex justify-between items-center mb-8">
-        <button className="btn btn-primary">
+        <button
+          className="btn btn-primary"
+          onClick={() =>
+            (
+              document.getElementById("add_product_modal") as HTMLDialogElement
+            )?.showModal()
+          }
+        >
           <FaPlusCircle className="size-5 mr-2" />
           Add Product
         </button>
@@ -25,6 +33,8 @@ export default function HomePage() {
           <LuRefreshCw className="size-5" />
         </button>
       </div>
+
+      <AddProductModal />
 
       {error && <div className="alert alert-error mb-8">{error}</div>}
 
