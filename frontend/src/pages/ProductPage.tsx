@@ -17,14 +17,18 @@ export default function ProductPage() {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const productId = id ? parseInt(id) : undefined;
 
   useEffect(() => {
-    fetchProduct(id);
-  }, [fetchProduct, id]);
+    if (productId) fetchProduct(productId);
+  }, [fetchProduct, productId]);
 
   const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      await deleteProduct(id);
+    if (
+      productId &&
+      window.confirm("Are you sure you want to delete this product?")
+    ) {
+      await deleteProduct(productId);
     }
     navigate("/");
   };
@@ -66,7 +70,7 @@ export default function ProductPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                updateProduct(id);
+                if (productId) updateProduct(productId);
               }}
               className="space-y-6"
             >

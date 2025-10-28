@@ -4,9 +4,8 @@
   "description": "",
   "main": "backend/dist/server.js",
   "scripts": {
-    "dev": "ts-node backend/server.ts",
-    "build": "tsc -p backend/tsconfig.json",
-    "start": "node --watch backend/dist/server.js"
+    "start": "node backend/dist/server.js",
+    "build": "tsc -p backend/tsconfig.json"
   },
   "keywords": [],
   "author": "",
