@@ -5,7 +5,7 @@
   "main": "backend/dist/server.js",
   "scripts": {
     "start": "node backend/dist/server.js",
-    "build": "tsc -p backend/tsconfig.json"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend && tsc -p backend/tsconfig.json"
   },
   "keywords": [],
   "author": "",
